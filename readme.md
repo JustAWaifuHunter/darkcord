@@ -5,7 +5,7 @@
 const DarkCord = require('darkcord.js')
 
 const client = DarkCord({
-    intents: [INTENTS] // Ex. DarkCord.Intents.GUILD_MESSAGES
+    intents: [INTENTS], // Ex. DarkCord.Intents.GUILD_MESSAGES
     token: 'Bot Token'
 }) // => Client
 

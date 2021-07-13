@@ -2,6 +2,7 @@ import EventEmitter from 'events'
 import Client from '../Client'
 import ShardManager from '../gateway/ShardManager'
 
+/** DarkCord WebSocket Manager */
 class WsManager extends EventEmitter {
     private shards: ShardManager;
     constructor (private client: Client) {
@@ -10,7 +11,8 @@ class WsManager extends EventEmitter {
       this.shards = new ShardManager(this.client)
     }
 
-    async connect (shards: number, { token }: { token: string }) {
+    /** Spawn Shards */
+    async connect (shards: number) {
       try {
         for (let shard = 0; shard <= shards; ++shard) {
           this.shards.spawn(shard.toString())

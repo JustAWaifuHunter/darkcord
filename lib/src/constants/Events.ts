@@ -7,5 +7,7 @@ export enum Events {
     MESSAGE_REACTION_REMOVE = 'reactionRemove',
     CONNECT = 'connect',
     DISCONNECT = 'disconnect',
-    SHARD_READY = 'shardReady'
+    SHARD_READY = 'shardReady',
+    GUILD_CREATE = 'guildCreate',
+    GUILD_DELETE = 'guildDelete'
 }

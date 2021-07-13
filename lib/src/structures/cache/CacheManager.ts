@@ -1,12 +1,11 @@
 import type Client from '../../Client'
+import { CacheTypes } from '../../types/Types'
 
 class CacheManager {
   constructor (public client: Client) {}
 
-  manage (type: string, key: string, value: object) {
-    // @ts-ignore
+  manage (type: CacheTypes, key: string, value: any) {
     if (this.client.options.cache[type]) {
-      // @ts-ignore
       this.client[type].set(key, value)
       return true
     } else {

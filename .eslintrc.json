@@ -22,6 +22,8 @@
         "no-case-declarations": "off",
         "no-const-assign": "off",
         "no-useless-constructor": "off",
-        "no-unused-expressions": "off"
+        "no-unused-expressions": "off",
+        "no-dupe-class-members": "off",
+        "no-redeclare": "off"
     }
 }

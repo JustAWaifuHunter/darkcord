@@ -2,7 +2,7 @@
   "name": "darkcord-nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/index.test.js",
   "scripts": {
     "dev": "tsc && node ."
   },

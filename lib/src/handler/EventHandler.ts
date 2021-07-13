@@ -19,16 +19,27 @@ class EventHandler {
     this.client.emit(Events.MESSAGE_CREATE, message)
   }
 
+  async guildCreate () {
+    const guild = await this.resolve.resolveGuild(this.payload)
+    this.client.emit(Events.GUILD_CREATE, guild)
+  }
+
+  async guildDelete () {
+    this.client.emit(Events.GUILD_DELETE, this.payload.id)
+  }
+
   ready () {
     this.client.emit(Events.READY)
   }
 
-  reaction () {
-
+  async reaction () {
+    const reaction = await this.resolve.resolveReaction(this.payload)
+    this.client.emit(Events.MESSAGE_REACTION_ADD, reaction)
   }
 
-  reactionRemove () {
-
+  async reactionRemove () {
+    const reaction = await this.resolve.resolveReaction(this.payload)
+    this.client.emit(Events.MESSAGE_REACTION_REMOVE, reaction)
   }
 }
 

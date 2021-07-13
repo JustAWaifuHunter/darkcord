@@ -10,6 +10,8 @@ import Message from '../structures/Message'
 import TextChannel from '../structures/channels/TextChannel'
 import { Events } from '../constants/Events'
 import CacheManager from '../structures/cache/CacheManager'
+import Emoji from '../structures/Emoji'
+import Reaction from '../structures/Reaction'
 
 class Resolve {
   private cache: CacheManager;
@@ -34,6 +36,30 @@ class Resolve {
       user?.flags,
       user?.premium_type,
       user?.public_flags
+    )
+  }
+
+  resolveEmoji (emoji: any) {
+    const {
+      id,
+      name,
+      roles,
+      user,
+      require_colons,
+      managed,
+      animated,
+      avaible
+    } = emoji
+
+    return new Emoji(
+      id,
+      name,
+      roles,
+      user,
+      require_colons,
+      managed,
+      animated,
+      avaible
     )
   }
 
@@ -200,6 +226,56 @@ class Resolve {
       permission_overwrites,
       nsfw,
       rate_limit_per_user
+    )
+  }
+
+  async resolveReaction (reaction: any) {
+    const {
+      user_id,
+      channel_id,
+      message_id,
+      guild_id
+    } = reaction
+
+    let user = this.client.users.get(user_id)
+    let guild = this.client.guilds.get(guild_id)
+    let channel = this.client.channels.get(channel_id)
+    const emoji = this.resolveEmoji(reaction.emoji)
+    
+    let member
+    if (reaction.member) {
+      member = this.resolveMember(reaction.member, guild_id)
+    }
+
+    if (!user) {
+      user = await this.client.rest.fetch.user(user_id)
+      user = this.resolveUser(<any>user)
+      this.cache.manage('users', user_id, user)
+    }
+
+    if (!guild) {
+      guild = await this.client.rest.fetch.guild(guild_id)
+      guild = this.resolveGuild(guild)
+      this.cache.manage('guilds', guild_id, guild)
+    }
+
+    if (!channel) {
+      channel = await this.client.rest.fetch.channel(channel_id)
+      channel = await this.resolveTextChannel(channel)
+      this.cache.manage('channels', channel_id, channel)
+    }
+
+    let message = await this.client.rest.fetch.message(channel_id, message_id)
+    message = this.resolveMessage(message)
+
+    return new Reaction(
+      user,
+      <TextChannel>
+      channel,
+      message,
+      guild,
+      emoji,
+      member
     )
   }
 

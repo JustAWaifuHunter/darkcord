@@ -205,13 +205,13 @@ class Guild {
       let owner = this.members.get(this.ownerId)
 
       if (!owner) {
-        const resolve = new Resolve(this.client);
+        const resolve = new Resolve(this.client)
 
-        (async () => {
+        async () => {
           const ownerMember = await this.client.rest.fetch.member(this.id, this.ownerId)
-          owner = resolve.resolveMember(ownerMember)
+          owner = resolve.resolveMember(ownerMember, this.id)
           this.members.set(this.ownerId, owner)
-        })
+        }
       }
 
       return owner

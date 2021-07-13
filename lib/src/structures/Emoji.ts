@@ -11,7 +11,7 @@ class Emoji {
         private _requiredColons: boolean = false,
         private _managed: boolean = false,
         private _animated: boolean = false,
-        private _available: boolean = false
+        private _available: boolean = true
   ) {
     return this
   }

@@ -26,6 +26,6 @@ export enum Regex {
     emoji_with_colon = ':\\w+:\\d+',
     group_emoji_id = '^:\\w+:(\\d+)$',
     emoji_id_only = '^\\d+$',
-    group_emoji_name = '^:(\\w+):\d+$',
+    group_emoji_name = '^:(\\w+):d+$',
     group_emoji = '^:(\\w+):(\\d+)$'
 }

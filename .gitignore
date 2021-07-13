@@ -3,7 +3,7 @@
 /.idea
 
 # Files
-index.ts
+index.test.ts
 scripts.json
 import_map.json
 

@@ -10,8 +10,20 @@ import type BaseChannel from './structures/channels/BaseChannel'
 import type Emoji from './structures/Emoji'
 import type { ClientOptions, ClientOptions2 } from './types/Interfaces'
 import type { IntentsType } from './types/Types'
-import type Member from './structures/Member'
+import type Message from './structures/Message'
+import type Reaction from './structures/Reaction'
 
+declare interface Client {
+  on (event: string | symbol, listener: (...args: any[]) => void): Client
+  on (event: 'message', listener: (message: Message) => void): Client
+  on (event: 'reaction', listener: (reaction: Reaction) => void): Client
+  on (event: 'reactionRemove', listener: (reaction: Reaction) => void): Client
+  on (event: 'ready', listener: () => void): Client
+  on (event: 'guildCreate', listener: (guild: Guild) => void): Client
+  on (event: 'guildDelete', listener: (guildId: string) => void): Client
+}
+
+/** DarkCord Client */
 class Client extends EventEmitter {
     public rest: RestAPI;
     private socket: WebSocket;
@@ -68,6 +80,7 @@ class Client extends EventEmitter {
       this.startedAt = null
     }
 
+    /** Connect bot to Discord API */
     async login (token: string = this.token): Promise<Client> {
       if (!token) throw new Error('Invalid token.')
       this.token = token = token.replace(/^(Bot|Bearer)/i, '')
@@ -76,7 +89,7 @@ class Client extends EventEmitter {
       this.emit(Events.DEBUG, `Token: ${this.token}`)
 
       try {
-        await this.socket.connect(this.options.shardCount || 0, { token: this.token })
+        await this.socket.connect(this.options.shardCount || 0)
         this.startedAt = Date.now()
         return this
       } catch (err) {
@@ -84,8 +97,14 @@ class Client extends EventEmitter {
       }
     }
 
+    /** Get bot uptime */
     get uptime (): number | null {
       return this.startedAt ? Date.now() - this.startedAt! : null
+    }
+
+    on (event: string | symbol, listener: (...args: any[]) => void) {
+      super.on(event, listener)
+      return this
     }
 }
 

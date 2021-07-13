@@ -9,7 +9,7 @@ export type EventNoResolvable = 'DEBUG' | 'READY' | 'MESSAGE_CREATE' | 'MESSAGE_
 export type EventResolvable = 'ready' | 'message' | 'reaction' | 'reactionRemove';
 export type IntentsType = 'GUILDS' | 'GUILD_MEMBERS' | 'GUILD_BANS' | 'GUILD_EMOJIS' | 'GUILD_INTEGRATIONS' | 'GUILD_WEBHOOKS' | 'GUILD_INVITES' | 'GUILD_VOICE_STATES' | 'GUILD_PRESENCES' | 'GUILD_MESSAGES' | 'GUILD_MESSAGE_REACTIONS' | 'GUILD_MESSAGE_TYPING' | 'DIRECT_MESSAGES' | 'DIRECT_MESSAGE_REACTIONS' | 'DIRECT_MESSAGE_TYPING';
 export type ImageFormat = 'png' | 'jpeg' | 'jpg' | 'webp' | 'gif';
-
+export type CacheTypes = 'channels' | 'users' | 'guilds' | 'emojis';
 export enum ChannelType {
     TEXT = 0,
     DM = 1,

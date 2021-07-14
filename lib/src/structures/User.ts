@@ -58,10 +58,12 @@ class User {
     return this._publicFlags
   }
 
+  /** Get user avatar */
   public get avatar (): string {
     return this._avatar
   }
 
+  /** Get user avatar url */
   public avatarURL ({ format = 'webp', dynamic = false, size = '128' }: { format: ImageFormat, dynamic: boolean, size: '128' | '2048' }) {
     if (dynamic) format = this.avatar.startsWith('a_') ? 'gif' : format
 

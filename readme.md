@@ -17,5 +17,5 @@ client.on('message', (message) => {
 
 (async () => {
     await client.login() // => Promise<Client>
-})
+})()
 ```

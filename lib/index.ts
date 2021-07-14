@@ -26,6 +26,10 @@ import Command from './src/structures/command/Command'
 import CommandContext from './src/structures/command/CommandContext'
 import ClientUser from './src/ClientUser'
 
+/** DarkCord Function
+ * @param options Client options
+ * @returns DarkCord Client
+ */
 function DarkCord (options?: ClientOptions): Client {
   return new Client(options)
 }

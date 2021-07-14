@@ -46,6 +46,20 @@ class RestAPI {
       )
     }
 
+    async banMember (guildId: string, memberId: string, days: number, reason?: string) {
+      return await fetch(
+        `${Constants.API}/${EndPoints.guilds}/${guildId}/bans/${memberId}`,
+        {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify({
+            delete_message_days: days,
+            reason
+          })
+        }
+      )
+    }
+
     set token (token: string) {
       this._token = token
       headers.Authorization = `Bot ${this._token}`

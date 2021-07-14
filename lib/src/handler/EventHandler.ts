@@ -28,6 +28,25 @@ class EventHandler {
     this.client.emit(Events.GUILD_DELETE, this.payload.id)
   }
 
+  async guildUpdate () {
+    const guild = await this.resolve.resolveGuild(this.payload)
+    this.client.emit(Events.GUILD_UPDATE, guild)
+  }
+
+  guildBan () {
+    const guildId = this.payload.guild_id
+    const user = this.resolve.resolveUser(this.payload.user)
+
+    this.client.emit(Events.GUILD_BAN_ADD, guildId, user)
+  }
+
+  guildBanRemove () {
+    const guildId = this.payload.guild_id
+    const user = this.resolve.resolveUser(this.payload.user)
+
+    this.client.emit(Events.GUILD_BAN_REMOVE, guildId, user)
+  }
+
   ready () {
     this.client.emit(Events.READY)
   }

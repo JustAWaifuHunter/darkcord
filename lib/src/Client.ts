@@ -8,10 +8,11 @@ import type User from './structures/User'
 import type Guild from './structures/Guild'
 import type BaseChannel from './structures/channels/BaseChannel'
 import type Emoji from './structures/Emoji'
-import type { ClientOptions, ClientOptions2 } from './types/Interfaces'
+import type { ClientOptions, ClientOptions2, CommandOptions } from './types/Interfaces'
 import type { IntentsType } from './types/Types'
 import type Message from './structures/Message'
 import type Reaction from './structures/Reaction'
+import Command from './structures/command/Command'
 
 declare interface Client {
   on (event: string | symbol, listener: (...args: any[]) => void): Client
@@ -21,12 +22,12 @@ declare interface Client {
   on (event: 'ready', listener: () => void): Client
   on (event: 'guildCreate', listener: (guild: Guild) => void): Client
   on (event: 'guildDelete', listener: (guildId: string) => void): Client
+  on (event: 'command', listener: (command: CommandOptions) => void): Client
 }
 
 /** DarkCord Client */
 class Client extends EventEmitter {
     public rest: RestAPI;
-    private socket: WebSocket;
     public token: string = '';
     private startedAt: number | null;
     public options: ClientOptions2;
@@ -35,7 +36,8 @@ class Client extends EventEmitter {
     public emojis: Collection<string, Emoji>;
     public channels: Collection<string, BaseChannel>;
     public user: User | any;
-
+    public commands: Collection<string, Command>;
+    public socket: WebSocket
     constructor (private _options?: ClientOptions) {
       super()
 
@@ -43,6 +45,7 @@ class Client extends EventEmitter {
       this.guilds = new Collection()
       this.emojis = new Collection()
       this.channels = new Collection()
+      this.commands = new Collection()
 
       let intents = 0
       if (this._options?.intents) {

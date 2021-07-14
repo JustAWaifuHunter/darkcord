@@ -12,7 +12,7 @@ class Message {
         private _client: Client,
         private _id: string,
         private _channel: TextChannel,
-        private _guild: Guild,
+        private _guild: Guild | null,
         private _author: User,
         private _member: Member | null,
         private _content: string,
@@ -35,7 +35,7 @@ class Message {
       return this._id
     }
 
-    public get guild (): Guild {
+    public get guild (): Guild | null {
       return this._guild
     }
 
@@ -55,7 +55,7 @@ class Message {
       return this._content
     }
 
-    public get member (): Member | null{
+    public get member (): Member | null {
       return this._member
     }
 
@@ -79,11 +79,11 @@ class Message {
       return this._nonce
     }
 
-    public get mentionedEveryone(): boolean {
+    public get mentionedEveryone (): boolean {
       return this._mentionedEveryone
     }
 
-    public get editedAt() {
+    public get editedAt () {
       return this._editedAt ? this._editedAt : null
     }
 

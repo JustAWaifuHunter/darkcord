@@ -1,5 +1,5 @@
 import BaseChannel from './BaseChannel'
-import type { ChannelTypeDef } from '../../types/Types'
+import type { ChannelTypeDef, MessageContent } from '../../types/Types'
 import type Client from '../../Client'
 import Collection from '../../collection/Collection'
 import type Message from '../Message'
@@ -28,7 +28,7 @@ class DMChannel extends BaseChannel {
       return this._messages
     }
 
-    async send (content: string | MessageOptions | Embed) {
+    async send (content: MessageContent) {
       if (typeof content === 'string') {
         const body: MessageOptions = { content }
         const res = await this.client.rest.createMessage(body, this.id)

@@ -1,9 +1,11 @@
+import Client from '../Client'
 import { ImageFormat } from '../types/Types'
 import User from './User'
 
 class Member {
   constructor (
         private _id: string,
+        private client: Client,
         private _user: User,
         private _nickname: string,
         private _joinedDate: Date,
@@ -46,6 +48,10 @@ class Member {
 
   public get avatar (): string {
     return this._avatar
+  }
+
+  public async ban (reason?: string, days: number = 0) {
+    return await this.client.rest.banMember(this._guildId, this.id, days, reason)
   }
 
   public avatarURL ({ format = 'webp', dynamic = false, size = '128' }: { format: ImageFormat, dynamic: boolean, size: '128' | '2048' }) {

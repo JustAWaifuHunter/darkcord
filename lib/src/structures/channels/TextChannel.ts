@@ -1,7 +1,7 @@
 import { MessageOptions, TextBasedChannel } from '../../types/Interfaces'
 import GuildChannel from './GuildChannel'
 import type Guild from '../Guild'
-import type { ChannelTypeDef } from '../../types/Types'
+import type { ChannelTypeDef, MessageContent } from '../../types/Types'
 import type Client from '../../Client'
 import Embed from '../Embed'
 import Resolve from '../../util/Resolve'
@@ -55,7 +55,7 @@ class TextChannel extends GuildChannel implements TextBasedChannel {
       return this._client
     }
 
-    public async send (content: string | MessageOptions | Embed) {
+    public async send (content: MessageContent) {
       if (typeof content === 'string') {
         const body: MessageOptions = { content }
         const res = await this.client.rest.createMessage(body, this.id)

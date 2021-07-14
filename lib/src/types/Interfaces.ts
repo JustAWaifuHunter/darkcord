@@ -1,5 +1,6 @@
 import type GuildChannel from '../structures/channels/GuildChannel'
 import type TextChannel from '../structures/channels/TextChannel'
+import CommandContext from '../structures/command/CommandContext'
 import type Guild from '../structures/Guild'
 import type Message from '../structures/Message'
 
@@ -95,6 +96,25 @@ export interface TextBasedChannel {
     send(content: string | MessageOptions): any
 }
 
+export interface CommandOptions {
+    name: string,
+    description?: string | any,
+    category?: string | any,
+    guildOnly?: boolean,
+    ownerOnly?: boolean,
+    dmOnly?: boolean,
+    onlyUsers?: string[],
+    ignoreBots?: boolean,
+    ignoreUsers?: string[],
+    onlyGuilds?: string[],
+    ignoreGuilds?: string[],
+    examples?: string[]
+}
+
+export interface CommandExecute {
+    ctx: CommandContext,
+    args?: string[]
+}
 export interface field {
     name: string,
     value: string,

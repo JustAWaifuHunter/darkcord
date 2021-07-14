@@ -22,6 +22,9 @@ import CacheManager from './src/structures/cache/CacheManager'
 import WsManager from './src/ws/WebSocket'
 import RestAPI from './src/rest/RestAPI'
 import Reaction from './src/structures/Reaction'
+import Command from './src/structures/command/Command'
+import CommandContext from './src/structures/command/CommandContext'
+import ClientUser from './src/ClientUser'
 
 function DarkCord (options?: ClientOptions): Client {
   return new Client(options)
@@ -50,5 +53,8 @@ DarkCord.CacheManager = CacheManager
 DarkCord.WebSocket = WsManager
 DarkCord.Rest = RestAPI
 DarkCord.Reaction = Reaction
+DarkCord.Command = Command
+DarkCord.CommandContext = CommandContext
+DarkCord.ClientUser = ClientUser
 
 export default DarkCord

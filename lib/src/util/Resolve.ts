@@ -77,6 +77,7 @@ class Resolve {
 
     return new Member(
       user.id,
+      this.client,
       user,
       nick,
       joined_at,
@@ -241,7 +242,7 @@ class Resolve {
     let guild = this.client.guilds.get(guild_id)
     let channel = this.client.channels.get(channel_id)
     const emoji = this.resolveEmoji(reaction.emoji)
-    
+
     let member
     if (reaction.member) {
       member = this.resolveMember(reaction.member, guild_id)

@@ -9,5 +9,8 @@ export enum Events {
     DISCONNECT = 'disconnect',
     SHARD_READY = 'shardReady',
     GUILD_CREATE = 'guildCreate',
-    GUILD_DELETE = 'guildDelete'
+    GUILD_DELETE = 'guildDelete',
+    GUILD_UPDATE = 'guildUpdate',
+    GUILD_BAN_ADD = 'guildBan',
+    GUILD_BAN_REMOVE = 'guildBanRemove'
 }

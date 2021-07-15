@@ -15,6 +15,7 @@ import type Reaction from './structures/Reaction'
 import Command from './structures/command/Command'
 import { CacheManager, Resolve } from '..'
 import Member from './structures/Member'
+import { CommandLoader } from './structures/command/Loader'
 
 declare interface Client {
   on (event: string | symbol, listener: (...args: any[]) => void): Client
@@ -148,6 +149,11 @@ class Client extends EventEmitter {
       }
 
       return guild
+    }
+
+    /** Load commands */
+    commandLoader (path: string) {
+      return CommandLoader(this, path)
     }
 
     on (event: string | symbol, listener: (...args: any[]) => void) {

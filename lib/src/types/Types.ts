@@ -14,6 +14,7 @@ export type IntentsType = 'GUILDS' | 'GUILD_MEMBERS' | 'GUILD_BANS' | 'GUILD_EMO
 export type ImageFormat = 'png' | 'jpeg' | 'jpg' | 'webp' | 'gif';
 export type CacheTypes = 'channels' | 'users' | 'guilds' | 'emojis';
 export type MessageContent = string | MessageOptions | Embed;
+export type StyleTimestamp = 't' | 'T' | 'd' | 'D' | 'f *' | 'F' | 'R';
 
 export enum ChannelType {
     TEXT = 0,

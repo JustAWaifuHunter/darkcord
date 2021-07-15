@@ -13,6 +13,8 @@ import type { IntentsType } from './types/Types'
 import type Message from './structures/Message'
 import type Reaction from './structures/Reaction'
 import Command from './structures/command/Command'
+import { CacheManager, Resolve } from '..'
+import Member from './structures/Member'
 
 declare interface Client {
   on (event: string | symbol, listener: (...args: any[]) => void): Client
@@ -103,6 +105,49 @@ class Client extends EventEmitter {
     /** Get bot uptime */
     get uptime (): number | null {
       return this.startedAt ? Date.now() - this.startedAt! : null
+    }
+
+    /** Get discord user */
+    async getUser (id: string): Promise<User> {
+      let user = this.users.get(id)
+
+      if (!user) {
+        const userNoResolvable = await this.rest.fetch.user(id)
+
+        const resolve = new Resolve(this)
+        user = resolve.resolveUser(userNoResolvable)
+
+        new CacheManager(this).manage('users', id, user)
+      }
+
+      return user
+    }
+
+    /** Get guild member */
+    async getMember (memberId: string, guildId: string): Promise<Member> {
+      const memberNoResolvable = await this.rest.fetch.member(guildId, memberId)
+
+      const resolve = new Resolve(this)
+      const member = resolve.resolveMember(memberNoResolvable, guildId)
+
+      return member
+    }
+
+    /** Get guild */
+    async getGuild (id: string) {
+      let guild = this.guilds.get(id)
+
+      if (guild) {
+        const guildNoResolvable = this.rest.fetch.guild(id)
+
+        const resolve = new Resolve(this)
+
+        guild = resolve.resolveGuild(guildNoResolvable)
+
+        new CacheManager(this).manage('guilds', id, guild)
+      }
+
+      return guild
     }
 
     on (event: string | symbol, listener: (...args: any[]) => void) {

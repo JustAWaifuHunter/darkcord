@@ -61,4 +61,4 @@ DarkCord.Command = Command
 DarkCord.CommandContext = CommandContext
 DarkCord.ClientUser = ClientUser
 
-export default DarkCord
+export = DarkCord

@@ -1,3 +1,4 @@
+import Format from '../util/DFormats'
 import { ImageFormat } from '../types/Types'
 
 class User {
@@ -16,6 +17,10 @@ class User {
         private _publicFlags: number = 0
   ) {
     return this
+  }
+
+  get mention () {
+    return Format.createUserMention(this.id)
   }
 
   public get id () {
@@ -68,6 +73,10 @@ class User {
     if (dynamic) format = this.avatar.startsWith('a_') ? 'gif' : format
 
     return `https://cdn.discordapp.com/avatars/${this.id}/${this.avatar}.${format}?${size}`
+  }
+
+  toString () {
+    return this.mention
   }
 }
 

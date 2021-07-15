@@ -1,18 +1,20 @@
-const DFormats: Record<string, Function> = {}
-
-/** Creates timestamp */
-DFormats.createTimestamp = (time: number) => {
-  return `<t:${time}>`
-}
-
-/** Creates user mention */
-DFormats.createUserMention = (userId: string) => {
-  return `<@!${userId}>`
-}
-
-/** Creates role mention */
-DFormats.createRoleMention = (roleId: string) => {
-  return `@&${roleId}`
+const DFormats: {
+  /** Creates timestamp */
+  createTimestamp: (time: number) => string;
+  /** Creates user mention */
+  createUserMention: (userId: string) => string;
+  /** Creates role mention */
+  createRoleMention: (roleId: string) => string
+} = {
+  createTimestamp: (time: number) => {
+    return `<t:${time}>`
+  },
+  createUserMention: (userId: string) => {
+    return `<@!${userId}>`
+  },
+  createRoleMention: (roleId: string) => {
+    return `@&${roleId}`
+  }
 }
 
 export default DFormats

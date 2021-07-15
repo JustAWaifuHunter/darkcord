@@ -1,6 +1,7 @@
 import Client from '../Client'
 import { ImageFormat } from '../types/Types'
 import User from './User'
+import Format from '../util/DFormats'
 
 class Member {
   constructor (
@@ -16,6 +17,10 @@ class Member {
         private _guildId: string
   ) {
     return this
+  }
+
+  get mention () {
+    return Format.createUserMention(this.id)
   }
 
   public get id (): string {
@@ -57,6 +62,10 @@ class Member {
   public avatarURL ({ format = 'webp', dynamic = false, size = '128' }: { format: ImageFormat, dynamic: boolean, size: '128' | '2048' }) {
     if (dynamic) format = this.avatar.startsWith('a_') ? 'gif' : format
     return `https://cdn.discordapp.com/guilds/${this._guildId}/users/${this.id}/avatars/${this.avatar}.${format}?${size}`
+  }
+
+  toString () {
+    return this.mention
   }
 }
 

@@ -25,6 +25,7 @@ import Reaction from './src/structures/Reaction'
 import Command from './src/structures/command/Command'
 import CommandContext from './src/structures/command/CommandContext'
 import ClientUser from './src/ClientUser'
+import DFormats from './src/util/DFormats'
 
 /** DarkCord Function
  * @param options Client options
@@ -60,5 +61,6 @@ DarkCord.Reaction = Reaction
 DarkCord.Command = Command
 DarkCord.CommandContext = CommandContext
 DarkCord.ClientUser = ClientUser
+DarkCord.Format = DFormats
 
 export = DarkCord

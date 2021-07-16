@@ -1,6 +1,5 @@
 import fs from 'fs'
 import path from 'path'
-import { cpuUsage } from 'process'
 import type Client from '../../Client'
 import isClass from '../../util/isClass'
 import isConstructor from '../../util/isConstructor'

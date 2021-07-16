@@ -13,7 +13,8 @@ import type { IntentsType } from './types/Types'
 import type Message from './structures/Message'
 import type Reaction from './structures/Reaction'
 import Command from './structures/command/Command'
-import { CacheManager, Resolve } from '..'
+import CacheManager from './structures/cache/CacheManager'
+import Resolve from './util/Resolve'
 import Member from './structures/Member'
 import { CommandLoader } from './structures/command/Loader'
 
@@ -152,7 +153,7 @@ class Client extends EventEmitter {
     }
 
     /** Load commands */
-    commandLoader (path: string) {
+    commandLoader (path?: string) {
       return CommandLoader(this, path)
     }
 

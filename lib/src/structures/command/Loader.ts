@@ -16,10 +16,15 @@ export async function CommandLoader (client: Client, _path: string = 'darkcord/c
         fs.readdir(path.join(_path, pof), (err, files) => {
           if (err) throw err
 
+          files = files.filter(file => file.endsWith('.js'))
           for (const file of files) {
-            const _dir = path.join(dir, file)
-            if (isClass(file)) {
-              let commando = require(_dir)
+            const _dir = path.relative(dir, file)
+            let commando = require(_dir)
+
+            if (isClass(commando)) {
+              if (commando.default) {
+                commando = commando.default
+              }
 
               if (isConstructor(commando)) {
                 commando = new commando()
@@ -41,27 +46,32 @@ export async function CommandLoader (client: Client, _path: string = 'darkcord/c
           }
         })
       } else {
-        if (isClass(pof)) {
-          const _dir = path.join(dir, pof)
-
+        if (pof.endsWith('.js')) {
+          const _dir = path.relative(dir, pof)
           let commando = require(_dir)
 
-          if (isConstructor(commando)) {
-            commando = new commando()
-            if (commando.name) {
-              client.commands.set(commando.name, commando)
+          if (isClass(commando)) {
+            if (commando.default) {
+              commando = commando.default
+            }
+
+            if (isConstructor(commando)) {
+              commando = new commando()
+              if (commando.name) {
+                client.commands.set(commando.name, commando)
+              } else {
+                throw new Error(`Missing command name.\nFile: ${pof}`)
+              }
             } else {
-              throw new Error(`Missing command name.\nFile: ${pof}`)
+              if (commando.name) {
+                client.commands.set(commando.name, commando)
+              } else {
+                throw new Error(`Missing command name.\nFile: ${pof}`)
+              }
             }
           } else {
-            if (commando.name) {
-              client.commands.set(commando.name, commando)
-            } else {
-              throw new Error(`Missing command name.\nFile: ${pof}`)
-            }
+            throw new Error(`File ${pof} is not a class.`)
           }
-        } else {
-          throw new Error(`File ${pof} is not a class.`)
         }
       }
     }

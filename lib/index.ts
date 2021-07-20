@@ -31,9 +31,43 @@ import DFormats from './src/util/DFormats'
  * @param options Client options
  * @returns DarkCord Client
  */
-function DarkCord (options?: ClientOptions): Client {
-  return new Client(options)
+class DarkCord extends Client {
+  static Constants: typeof Constants
+  static Client: typeof Client
+  static Intents: typeof Intents
+  static Collection: typeof Collection
+  static BitField: typeof BitField
+  static Role: typeof Role
+  static Member: typeof Member
+  static User: typeof User
+  static Resolve: typeof Resolve
+  static Embed: typeof Embed
+  static Message: typeof Message
+  static Guild: typeof Guild
+  static TextChannel: typeof TextChannel
+  static BaseChannel: typeof BaseChannel
+  static GuildChannel: typeof GuildChannel
+  static DMChannel: typeof DMChannel
+  static Emoji: typeof Emoji
+  static Shard: typeof Shard
+  static ShardManager: typeof ShardManager
+  static CacheManager: typeof CacheManager
+  static WebSocket: typeof WsManager
+  static Rest: typeof RestAPI
+  static Reaction: typeof Reaction
+  static Command: typeof Command
+  static CommandContext: typeof CommandContext
+  static ClientUser: typeof ClientUser
+  static Format: typeof DFormats
+  /**
+   * DarkCord Function
+   * @param options Client Options
+   */
+  constructor(options?: ClientOptions) {
+    super(options)
+  }
 }
+
 
 DarkCord.Client = Client
 DarkCord.Constants = Constants

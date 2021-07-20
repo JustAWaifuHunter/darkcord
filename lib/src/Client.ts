@@ -140,7 +140,7 @@ class Client extends EventEmitter {
       let guild = this.guilds.get(id)
 
       if (guild) {
-        const guildNoResolvable = this.rest.fetch.guild(id)
+        const guildNoResolvable = await this.rest.fetch.guild(id)
 
         const resolve = new Resolve(this)
 
